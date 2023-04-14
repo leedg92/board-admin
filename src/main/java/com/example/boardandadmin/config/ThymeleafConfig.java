@@ -43,7 +43,7 @@ public class ThymeleafConfig {
             SpringResourceTemplateResolver defaultTemplateResolver,
             Thymeleaf3Properties thymeleaf3Properties
     ) {
-        defaultTemplateResolver.setUseDecoupledLogic(thymeleaf3Properties.isDecoupledLogic());  //원래 있던 deCoupledLogic을 뚫어 준 것 뿐
+        defaultTemplateResolver.setUseDecoupledLogic(thymeleaf3Properties.decoupledLogic());  //원래 있던 deCoupledLogic을 뚫어 준 것 뿐
 
         return defaultTemplateResolver;
     }
@@ -51,17 +51,8 @@ public class ThymeleafConfig {
 
     /*
     * 프로퍼티로 노출시키는 방식*/
-    @Getter
-    @RequiredArgsConstructor
-    @ConstructorBinding
     @ConfigurationProperties("spring.thymeleaf3")
-    public static class Thymeleaf3Properties {
-        /**
-         * Use Thymeleaf 3 Decoupled Logic
-         */
-        private final boolean decoupledLogic;
-
-    }
+    public record Thymeleaf3Properties(boolean decoupledLogic) {}
 
 }
 
